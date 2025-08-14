@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Il Giardino Segreto del Nostro Cuore - Abdullah & Roberta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&family=Crimson+Text:wght@400;600&display=swap");
+
+      body {
+        font-family: "Crimson Text", serif;
+        overflow-x: hidden;
+        background: radial-gradient(
+          ellipse at center,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f0f23 100%
+        );
+      }
+
+      .star {
+        will-change: transform, opacity;
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        animation: twinkle 3s infinite alternate;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      .star:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      }
+
+      .star.collected {
+        background: #ffd700;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        animation: golden-twinkle 2s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        0% {
+          opacity: 0.3;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      @keyframes golden-twinkle {
+        0% {
+          opacity: 0.7;
+          transform: scale(1.2);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.4);
+        }
+      }
+
+      .shooting-star {
+        will-change: transform, opacity;
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: linear-gradient(45deg, #fff, transparent);
+        animation: shoot 4s linear infinite;
+      }
+
+      @keyframes shoot {
+        0% {
+          transform: translateX(-100px) translateY(100px);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(400px) translateY(-100px);
+          opacity: 0;
+        }
+      }
+
+      .golden-gate {
+        background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+        border: 3px solid #ffed4e;
+        box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+        animation: gate-glow 3s ease-in-out infinite;
+      }
+
+      @keyframes gate-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+        }
+        50% {
+          box-shadow: 0 0 80px rgba(255, 215, 0, 1);
+        }
+      }
+
+      .word-popup {
+        animation: popup 0.5s ease-out;
+      }
+
+      @keyframes popup {
+        0% {
+          transform: scale(0) rotate(180deg);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      .certificate {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border: 8px solid #d4af37;
+        box-shadow: 0 0 40px rgba(212, 175, 55, 0.6),
+          inset 0 0 20px rgba(212, 175, 55, 0.1);
+        position: relative;
+      }
+
+      .certificate::before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        border: 3px solid #d4af37;
+        border-radius: 10px;
+      }
+
+      .certificate::after {
+        content: "";
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        right: 25px;
+        bottom: 25px;
+        border: 1px solid #d4af37;
+        border-radius: 5px;
+      }
+
+      .fade-in {
+        animation: fadeIn 1s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-out {
+        animation: fadeOut 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+      }
+
+      .collected-word {
+        background: linear-gradient(45deg, #ffd700, #ffed4e);
+        color: #333;
+        animation: word-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes word-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+      }
+
+      .gate-entrance {
+        animation: gateEntrance 2s ease-out;
+      }
+
+      @keyframes gateEntrance {
+        0% {
+          transform: translate(-50%, -50%) scale(0) rotate(360deg);
+          opacity: 0;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-white relative">
+    <!-- الشهب المتحركة -->
+    <div
+      class="shooting-star"
+      style="top: 10%; left: 5%; animation-delay: 0s"
+    ></div>
+    <div
+      class="shooting-star"
+      style="top: 30%; left: 80%; animation-delay: 1s"
+    ></div>
+    <div
+      class="shooting-star"
+      style="top: 60%; left: 20%; animation-delay: 2s"
+    ></div>
+    <div
+      class="shooting-star"
+      style="top: 80%; left: 70%; animation-delay: 3s"
+    ></div>
+
+    <!-- الصفحة الرئيسية -->
+    <div
+      id="main-page"
+      class="min-h-screen flex flex-col items-center justify-center relative"
+    >
+      <div
+        id="main-content"
+        class="text-center fade-in mb-8 transition-all duration-1000 px-4"
+      >
+        <p
+          class="text-xl sm:text-2xl md:text-3xl mb-4 text-yellow-300 font-bold"
+        >
+          Abdullah & Roberta
+        </p>
+        <p
+          class="text-lg sm:text-xl md:text-2xl mb-8 opacity-80 leading-relaxed"
+        >
+          Cara Roberta, clicca sulle stelle per scoprire le parole che ti
+          descrivono nel mio cuore
+        </p>
+      </div>
+
+      <!-- Barra di progresso -->
+      <div
+        id="progress-container"
+        class="fixed top-4 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000"
+      >
+        <div
+          class="bg-black bg-opacity-50 rounded-full p-2 sm:p-4 flex items-center gap-2 sm:gap-4"
+        >
+          <div id="progress-bar" class="flex gap-1 sm:gap-2">
+            <div
+              class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+            >
+              1
+            </div>
+            <div
+              class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+            >
+              2
+            </div>
+            <div
+              class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+            >
+              3
+            </div>
+            <div
+              class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+            >
+              4
+            </div>
+            <div
+              class="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+            >
+              5
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parole raccolte -->
+      <div
+        id="collected-words"
+        class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 px-4"
+      >
+        <div
+          class="flex gap-1 sm:gap-2 flex-wrap justify-center max-w-xs sm:max-w-md"
+        ></div>
+      </div>
+
+      <!-- النجوم -->
+      <div
+        id="stars-container"
+        class="absolute inset-0 transition-all duration-1000"
+      ></div>
+
+      <!-- Porta dorata (nascosta inizialmente) -->
+      <div
+        id="golden-gate"
+        class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 px-4"
+      >
+        <button
+          onclick="openGate()"
+          class="golden-gate gate-entrance px-6 sm:px-12 md:px-16 py-4 sm:py-6 md:py-8 rounded-3xl text-lg sm:text-2xl md:text-3xl font-bold text-black cursor-pointer transition-all duration-300 hover:scale-110 text-center"
+        >
+          🚪 Apri la Porta Segreta, Roberta
+        </button>
+      </div>
+    </div>
+
+    <!-- Finestra parola -->
+    <div
+      id="word-modal"
+      class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center z-40 p-4"
+    >
+      <div
+        class="word-popup bg-gradient-to-br from-purple-600 to-pink-600 p-6 sm:p-8 rounded-3xl text-center max-w-xs sm:max-w-sm mx-4"
+      >
+        <div class="text-4xl sm:text-6xl mb-4">✨</div>
+        <h3 id="word-text" class="text-2xl sm:text-3xl font-bold mb-4"></h3>
+        <p class="text-sm sm:text-lg mb-6 opacity-90 leading-relaxed">
+          Questa è una delle parole che ti descrivono nel cuore di Abdullah
+        </p>
+        <button
+          onclick="collectWord()"
+          class="bg-white text-purple-600 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold hover:bg-gray-100 transition-all duration-300 text-sm sm:text-base"
+        >
+          Raccogli questa parola, Roberta 💖
+        </button>
+      </div>
+    </div>
+
+    <!-- Finestra messaggio audio -->
+    <div
+      id="audio-modal"
+      class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center z-50 p-4"
+    >
+      <div
+        class="bg-gradient-to-br from-yellow-100 to-amber-100 text-gray-800 p-6 sm:p-8 rounded-3xl max-w-sm sm:max-w-lg mx-4 text-center"
+      >
+        <div class="text-4xl sm:text-6xl mb-4 sm:mb-6">🎵</div>
+        <h2
+          class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-amber-600 leading-tight"
+        >
+          Messaggio Speciale da Abdullah per Roberta
+        </h2>
+
+        <!-- مشغل الصوت أو الفيديو -->
+        <div
+          class="bg-amber-50 border-2 border-amber-200 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 text-center"
+        >
+          <!-- مثال للصوت -->
+          <audio
+            controls
+            onended="document.getElementById('show-cert-btn').classList.remove('hidden')"
+          >
+            <source src="audio/ro.mp3" type="audio/mpeg" />
+            متصفحك لا يدعم تشغيل الصوت.
+          </audio>
+
+          <!-- زر عرض الشهادة (مخفي بالبداية) -->
+          <button
+            id="show-cert-btn"
+            onclick="showCertificate()"
+            class="hidden mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full transition-all duration-300"
+          >
+            عرض الشهادة 🎖
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificato -->
+    <div
+      id="certificate-modal"
+      class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center z-50 p-2 sm:p-4 overflow-y-auto"
+    >
+      <div
+        class="certificate rounded-2xl sm:rounded-3xl max-w-xs sm:max-w-2xl md:max-w-4xl w-full text-gray-800 relative my-4 sm:my-8"
+      >
+        <div class="p-4 sm:p-8 md:p-12 relative z-10">
+          <!-- Intestazione -->
+          <div class="text-center mb-4 sm:mb-6 md:mb-8">
+            <div class="text-3xl sm:text-5xl md:text-6xl mb-2 sm:mb-4">🏆</div>
+            <h1
+              class="text-2xl sm:text-3xl md:text-5xl font-bold text-amber-700 mb-1 sm:mb-2 leading-tight"
+              style="font-family: 'Playfair Display', serif"
+            >
+              Certificato d'Amore
+            </h1>
+            <h2
+              class="text-lg sm:text-2xl md:text-4xl font-bold text-amber-600 leading-tight"
+              style="font-family: 'Playfair Display', serif"
+            >
+              Certificate of Love
+            </h2>
+            <div
+              class="w-16 sm:w-24 md:w-32 h-0.5 sm:h-1 bg-amber-600 mx-auto mt-2 sm:mt-4"
+            ></div>
+          </div>
+
+          <!-- Contenuto principale -->
+          <div class="text-center mb-4 sm:mb-6 md:mb-8">
+            <p
+              class="text-sm sm:text-lg md:text-xl mb-2 sm:mb-4 text-gray-700"
+              style="font-family: 'Playfair Display', serif"
+            >
+              Questo certificato attesta che
+            </p>
+            <p class="text-sm sm:text-lg md:text-xl mb-2 sm:mb-4 text-gray-700">
+              This certificate hereby certifies that
+            </p>
+
+            <div
+              class="bg-amber-50 border-2 border-amber-300 rounded-lg p-3 sm:p-4 md:p-6 my-4 sm:my-6 md:my-8"
+            >
+              <h3
+                class="text-xl sm:text-2xl md:text-4xl font-bold text-amber-700 mb-1 sm:mb-2 leading-tight"
+                style="font-family: 'Dancing Script', cursive"
+              >
+                Roberta Perego
+              </h3>
+              <p
+                class="text-sm sm:text-lg md:text-2xl text-amber-600 font-semibold"
+              >
+                La donna più speciale del mondo
+              </p>
+            </div>
+
+            <p
+              class="text-xs sm:text-sm md:text-lg leading-relaxed text-gray-700 mb-2 sm:mb-4"
+            >
+              È l'unica persona che fa sciogliere le distanze con le sue parole,
+              <br class="hidden sm:block" />
+              che trasforma la vita in un giardino segreto pieno di bellezza,
+              <br class="hidden sm:block" />
+              ed è la vera casa del mio cuore.
+            </p>
+
+            <p
+              class="text-xs sm:text-sm md:text-lg leading-relaxed text-gray-700 mb-3 sm:mb-6"
+            >
+              È colei che illumina ogni giorno con il suo sorriso,
+              <br class="hidden sm:block" />
+              che rende ogni momento speciale con la sua presenza,
+              <br class="hidden sm:block" />
+              e che è l'amore più puro e sincero della mia vita.
+            </p>
+          </div>
+
+          <!-- Firma e data -->
+          <div
+            class="flex flex-col sm:flex-row justify-between items-center sm:items-end gap-4 sm:gap-0 mb-16 sm:mb-0"
+          >
+            <div class="text-center sm:text-left">
+              <div
+                class="w-24 sm:w-32 md:w-48 h-0.5 bg-gray-400 mb-1 sm:mb-2 mx-auto sm:mx-0"
+              ></div>
+              <p
+                class="text-xs sm:text-sm md:text-lg font-semibold text-gray-700"
+              >
+                Data
+              </p>
+              <p
+                class="text-xs sm:text-sm text-gray-600"
+                id="certificate-date"
+              ></p>
+            </div>
+
+            <div class="text-center order-first sm:order-none">
+              <div class="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2">
+                💖
+              </div>
+              <p class="text-xs sm:text-sm text-gray-500">Seal of Love</p>
+            </div>
+
+            <div class="text-center sm:text-right">
+              <div
+                class="w-24 sm:w-32 md:w-48 h-0.5 bg-gray-400 mb-1 sm:mb-2 mx-auto sm:mx-0"
+              ></div>
+              <p
+                class="text-xs sm:text-sm md:text-lg font-semibold text-gray-700"
+              >
+                Firma
+              </p>
+              <p
+                class="text-sm sm:text-lg md:text-xl font-bold text-amber-700"
+                style="font-family: 'Dancing Script', cursive"
+              >
+                Abdullah Al-Asaad
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorazioni angoli -->
+        <div
+          class="absolute top-2 left-2 sm:top-4 sm:left-4 text-2xl sm:text-4xl text-amber-400 opacity-50"
+        >
+          ❋
+        </div>
+        <div
+          class="absolute top-2 right-2 sm:top-4 sm:right-4 text-2xl sm:text-4xl text-amber-400 opacity-50"
+        >
+          ❋
+        </div>
+        <div
+          class="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 text-2xl sm:text-4xl text-amber-400 opacity-50"
+        >
+          ❋
+        </div>
+        <div
+          class="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-2xl sm:text-4xl text-amber-400 opacity-50"
+        >
+          ❋
+        </div>
+      </div>
+
+      <!-- Pulsante di controllo -->
+      <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-60">
+        <button
+          onclick="restartGame()"
+          class="bg-purple-500 hover:bg-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold shadow-lg text-base sm:text-lg"
+        >
+          Ricomincia 🔄
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const words = [
+        "Dolce",
+        "Divertente",
+        "Casa Sicura",
+        "Luce del Cuore",
+        "Serenità",
+        "Sorriso",
+        "Calore",
+        "Sicurezza",
+        "Bellezza",
+        "Tenerezza",
+        "Forza",
+        "Ispirazione",
+        "Felicità",
+        "Tranquillità",
+        "Amore",
+        "Risata",
+        "Speranza",
+        "Stella",
+        "Tesoro",
+        "Patria",
+        "Sogno",
+        "Primavera",
+        "Gioia",
+        "Luce",
+        "Vita",
+      ];
+
+      let collectedWords = [];
+      let currentWord = "";
+      let starsCreated = false;
+
+      // إنشاء النجوم
+      function createStars() {
+        if (starsCreated) return;
+
+        const container = document.getElementById("stars-container");
+        let starCount =
+          window.innerWidth < 640 ? 30 : window.innerWidth < 1024 ? 50 : 70;
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+          star.style.left = Math.random() * 95 + "%";
+          star.style.top = Math.random() * 95 + "%";
+          star.style.width = Math.random() * 4 + 3 + "px";
+          star.style.height = star.style.width;
+          star.style.animationDelay = Math.random() * 3 + "s";
+
+          star.onclick = () => showWord(star);
+          container.appendChild(star);
+        }
+        starsCreated = true;
+      }
+
+      // عرض الكلمة
+      function showWord(starElement) {
+        if (starElement.classList.contains("collected")) return;
+
+        let availableWords = words.filter((w) => !collectedWords.includes(w));
+        if (availableWords.length === 0) return;
+        const randomWord =
+          availableWords[Math.floor(Math.random() * availableWords.length)];
+        currentWord = randomWord;
+        document.getElementById("word-text").textContent = randomWord;
+        document.getElementById("word-modal").classList.remove("hidden");
+
+        // تخزين مرجع النجم
+        window.currentStar = starElement;
+      }
+
+      // جمع الكلمة
+      function collectWord() {
+        if (collectedWords.length >= 5) return;
+
+        collectedWords.push(currentWord);
+
+        // تحديث النجم
+        window.currentStar.classList.add("collected");
+
+        // تحديث شريط التقدم
+        updateProgress();
+
+        // إضافة الكلمة للمجموعة
+        addWordToCollection(currentWord);
+
+        // إغلاق النافذة
+        document.getElementById("word-modal").classList.add("hidden");
+
+        // فحص إذا تم جمع 5 كلمات
+        if (collectedWords.length === 5) {
+          setTimeout(() => {
+            hideAllElements();
+          }, 1000);
+        }
+      }
+
+      // إخفاء كل العناصر وإظهار البوابة
+      function hideAllElements() {
+        // إخفاء العناصر الرئيسية
+        document.getElementById("main-content").classList.add("fade-out");
+        document.getElementById("progress-container").classList.add("fade-out");
+        document.getElementById("collected-words").classList.add("fade-out");
+        document.getElementById("stars-container").classList.add("fade-out");
+
+        // إظهار البوابة بعد اختفاء العناصر
+        setTimeout(() => {
+          document.getElementById("golden-gate").classList.remove("hidden");
+        }, 800);
+      }
+
+      // تحديث شريط التقدم
+      function updateProgress() {
+        const progressBar = document.getElementById("progress-bar");
+        const circles = progressBar.children;
+
+        for (let i = 0; i < collectedWords.length; i++) {
+          circles[i].classList.remove("border-gray-400");
+          circles[i].classList.add(
+            "border-yellow-400",
+            "bg-yellow-400",
+            "text-black"
+          );
+        }
+      }
+
+      // Aggiungi la parola alla collezione
+      function addWordToCollection(word) {
+        const container = document.querySelector("#collected-words .flex");
+        const wordElement = document.createElement("span");
+        wordElement.className =
+          "collected-word px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold";
+        wordElement.textContent = word;
+        container.appendChild(wordElement);
+      }
+
+      // فتح البوابة
+      function openGate() {
+        document.getElementById("golden-gate").classList.add("hidden");
+        document.getElementById("audio-modal").classList.remove("hidden");
+      }
+
+      // Mostra il certificato
+      function showCertificate() {
+        // Aggiungi la data corrente in italiano
+        const now = new Date();
+        const dateStr = now.toLocaleDateString("it-IT");
+        document.getElementById("certificate-date").textContent = dateStr;
+
+        document.getElementById("audio-modal").classList.add("hidden");
+        document.getElementById("certificate-modal").classList.remove("hidden");
+      }
+
+      // Riavvia il gioco
+      function restartGame() {
+        if (confirm("Vuoi ricominciare da capo, cara Roberta?")) {
+          window.location.reload();
+        }
+      }
+
+      // إغلاق نافذة الكلمة عند الضغط خارجها
+      document.getElementById("word-modal").addEventListener("click", (e) => {
+        if (e.target.id === "word-modal") {
+          document.getElementById("word-modal").classList.add("hidden");
+        }
+      });
+
+      // إغلاق نافذة الصوت عند الضغط خارجها
+      document.getElementById("audio-modal").addEventListener("click", (e) => {
+        if (e.target.id === "audio-modal") {
+          document.getElementById("audio-modal").classList.add("hidden");
+        }
+      });
+
+      // تشغيل إنشاء النجوم عند تحميل الصفحة
+      window.onload = function () {
+        createStars();
+      };
+    </script>
+  </body>
+</html>
